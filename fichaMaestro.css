@@ -1,0 +1,141 @@
+body {
+  background-color: #ffffff;
+  font-family: sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+/* Barra superior */
+.barra-superior {
+  background-color: #0033a0;
+  color: white;
+  padding: 20px 30px;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+
+.contenedor-barra {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo img { height: 60px; }
+
+.nav-barra a {
+  color: white;
+  text-decoration: none;
+  margin-left: 25px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.nav-barra a:hover { color: #ff0000; }
+
+.container {
+  padding: 30px;
+  background-color: #f4f9ff;
+  max-width: 500px;
+  margin: 80px auto;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.2);
+}
+
+h2 { color: #0033cc; }
+
+input, select, textarea {
+  padding: 10px;
+  width: 80%;
+  margin: 10px;
+  border: 2px solid #0033cc;
+  border-radius: 8px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #cc0000;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:hover { background-color: #990000; }
+
+#mensaje { margin-top: 10px; color: green; }
+
+/* Estilo para fieldset */
+fieldset {
+  border: 2px solid #0033cc;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+legend {
+  font-weight: bold;
+  color: #0033cc;
+  padding: 0 10px;
+}
+
+/* Select con flecha personalizada */
+select {
+  padding: 10px 40px 10px 10px;
+  width: 84%;
+  margin: 10px;
+  border: 2px solid #0033cc;
+  border-radius: 8px;
+  background-color: #ffffff;
+  font-size: 1rem;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='14'%20height='14'%3E%3Cpolygon%20points='0,0%2014,0%207,7'%20fill='%230033cc'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 14px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+select::-ms-expand { display: none; }
+select:focus { border-color: #0033cc; box-shadow: 0 0 5px rgba(0,51,204,0.5); outline: none; }
+
+
+
+
+
+/* Tabs */
+.tabs {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  border-bottom: 3px solid #0033cc;
+}
+
+.tablink {
+  background-color: #f4f9ff;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: #0033cc;
+  font-weight: bold;
+  transition: 0.3s;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.tablink.active {
+  background-color: #0033cc;
+  color: white;
+}
+.tabcontent {
+  display: none;
+}

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Ficha del Maestro - Edición</title>
+  <link rel="stylesheet" href="fichaMaestro.css">
+
+  <!-- Librería para leer Excel -->
+  <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+</head>
+
+<body>
+  <!-- Barra superior -->
+  <header class="barra-superior">
+    <div class="contenedor-barra">
+      <div class="logo">
+        <img src="logo.jpg" alt="Logo" />
+      </div>
+      <nav class="nav-barra">
+        <a href="inicio.html">Inicio</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container" id="fichaContainer"> <!-- Agregamos id para el JS -->
+    <!-- BOTÓN VER PERFIL (JS lo insertará aquí) -->
+
+    <h2>Ficha del Maestro - Edición</h2>
+
+    <!-- PESTAÑAS -->
+    <div class="tabs">
+      <button class="tablink active" onclick="abrirTab(event, 'datosPersonales')">Datos Personales</button>
+      <button class="tablink" onclick="abrirTab(event, 'datosLaborales')">Datos Laborales</button>
+      <button class="tablink" onclick="abrirTab(event, 'infoColaboracion')">Información de Colaboración</button>
+    </div>
+
+    <!-- CONTENIDO DE CADA TAB -->
+    <div id="datosPersonales" class="tabcontent" style="display:block;">
+      <label for="nombreCompleto">Nombre completo:</label>
+      <input type="text" id="nombreCompleto" placeholder="Nombre completo"><br>
+
+      <label for="edad">Edad:</label>
+      <input type="number" id="edad" placeholder="Edad"><br>
+
+      <label for="sexo">Sexo con el que se identifica:</label>
+      <select id="sexo">
+        <option value="">Seleccione</option>
+        <option value="Hombre">Hombre</option>
+        <option value="Mujer">Mujer</option>
+        <option value="Prefiero no decirlo">Prefiero no decirlo</option>
+      </select><br>
+
+      <label for="grado">Grado Académico:</label>
+      <input type="text" id="grado" placeholder="Grado Académico"><br>
+
+      <label for="contactoCorreo">Correo:</label>
+      <input type="email" id="contactoCorreo" placeholder="Correo electrónico"><br>
+
+      <label for="contactoTelefono">Teléfono:</label>
+      <input type="tel" id="contactoTelefono" placeholder="Teléfono"><br>
+
+      <label for="contactoRedes">Redes Sociales:</label>
+      <input type="text" id="contactoRedes" placeholder="Facebook, LinkedIn, etc."><br>
+
+      <label for="fotoPerfil">Foto de Perfil:</label>
+      <input type="file" id="fotoPerfil" accept="image/*"><br>
+
+      <button type="button" onclick="guardarSeccion('datosPersonales')">Guardar Datos Personales</button>
+    </div>
+
+    <div id="datosLaborales" class="tabcontent">
+      <h2>Datos Laborales</h2>
+
+      <label for="institucion">Nombre de su institución educativa:</label>
+      <select id="institucion" onchange="cambiarInstitucion(this.value)">
+        <option value="">Seleccione una opción</option>
+        <option value="UAGRO">UAGRO</option>
+        <option value="Otra">Otra</option>
+      </select>
+      <input type="text" id="institucionOtra" placeholder="Escriba el nombre de su institución" style="display:none; margin-top:5px;"><br>
+
+      <label for="escuela">Escuela Superior / Facultad:</label>
+      <select id="escuela"></select>
+      <input type="text" id="escuelaInput" placeholder="Escriba su escuela/facultad" style="display:none; margin-top:5px;"><br>
+
+      <label for="programa">Programa educativo:</label>
+      <div id="programasContainer"></div>
+      <input type="text" id="programaInput" placeholder="Escriba su(s) programa(s)" style="display:none; margin-top:5px;"><br>
+
+      <label for="formacionAcademica">Academia / Área de formación académica:</label>
+      <input type="text" id="formacionAcademica" placeholder="Ingrese su área de formación"><br>
+
+      <button type="button" onclick="guardarSeccion('datosLaborales')">Guardar Datos Laborales</button>
+    </div>
+
+    <div id="infoColaboracion" class="tabcontent">
+      <h2>Información de Colaboración</h2>
+
+      <div>
+        <h3>Asignatura (UAp) que impartirá</h3>
+        <div id="asignaturasColaboracion"></div>
+        <button type="button" onclick="agregarAsignaturaColaboracion()">Agregar asignatura</button>
+      </div>
+
+      <div>
+        <label>¿Ya colabora con un par académico de una institución educativa extranjera?</label>
+        <select id="colaboraExtranjero" onchange="mostrarContactoExtranjero(this.value)">
+          <option value="no">No</option>
+          <option value="si">Sí</option>
+        </select>
+        <div id="contactoExtranjero" style="display:none; margin-top:5px;">
+          <input type="text" id="nombreContactoExtranjero" placeholder="Nombre de contacto">
+          <input type="email" id="correoContactoExtranjero" placeholder="Correo de contacto">
+        </div>
+      </div>
+
+      <div>
+        <label>¿Ha realizado alguna actividad colaborativa internacional?</label>
+        <select id="actividadInternacional" onchange="mostrarActividad(this.value)">
+          <option value="no">No</option>
+          <option value="si">Sí</option>
+        </select>
+        <div id="descripcionActividad" style="display:none; margin-top:5px;">
+          <input type="text" id="detalleActividad" placeholder="Descripción de la actividad">
+        </div>
+      </div>
+
+      <button type="button" onclick="guardarSeccion('infoColaboracion')">Guardar información de colaboración</button>
+    </div>
+
+    <div id="mensaje" style="margin-top:15px; font-weight:bold;"></div>
+  </div>
+
+  <script src="fichaMaestroEdicion.js"></script>
+</body>
+
+</html>

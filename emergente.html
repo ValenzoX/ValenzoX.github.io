@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cuenta no registrada</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; margin-top: 80px; }
+    .box { display: inline-block; padding: 20px; background: #f8faff; border-radius: 10px; border: 1px solid #ccc; }
+    button { padding: 10px 20px; margin: 10px; border: none; border-radius: 6px; cursor: pointer; }
+    .otro { background-color: #005599; color: white; }
+    .registrar { background-color: #cc0000; color: white; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>Esta cuenta no ha sido registrada</h2>
+    <p id="correo"></p>
+    <button class="otro" onclick="window.location.href='iniciar_sesion.html'">Probar con otro correo</button>
+    <button class="registrar" onclick="window.location.href='registro.html'">Registrarse</button>
+  </div>
+
+  <script>
+    document.getElementById("correo").textContent = localStorage.getItem("correoNoRegistrado") || "";
+  </script>
+</body>
+</html>
+

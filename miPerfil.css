@@ -1,0 +1,282 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background-color: #ffffff;
+  color: #1a1a1a;
+}
+
+.barra-superior {
+  background-color: #003366;
+  padding: 20px 0;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.contenedor-barra {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo img {
+  height: 50px;
+}
+
+.nav-barra {
+  display: flex;
+  align-items: center;
+  margin-right: 5px; /* lo acercamos al botón */
+}
+
+.nav-barra a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  margin-left: 5px; /* reducimos espacio */
+  transition: 0.3s;
+}
+
+
+.nav-barra a:hover {
+  color: #ff3333;
+}
+
+.hamburger {
+  font-size: 26px;
+  margin-left: 20px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.menu-oculto {
+  display: none;
+  position: absolute;
+  right: 20px;
+  top: 80px;
+  background-color: #f8faff;
+  border: 1px solid #d6e0f0;
+  border-radius: 10px;
+  padding: 15px;
+  width: 250px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.menu-visible {
+  display: block;
+}
+
+.campo-password {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.campo-password input {
+  padding: 6px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.campo-password button {
+  background-color: #003366;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+.campo-password button:hover {
+  background-color: #005599;
+}
+
+.container {
+  width: 90%;
+  max-width: 1000px;
+  margin: 40px auto;
+  background-color: #f8faff;
+  border: 1px solid #d6e0f0;
+  border-radius: 12px;
+  padding: 30px 40px;
+  box-shadow: 0 0 10px rgba(0, 51, 102, 0.1);
+}
+
+h2 {
+  color: #003366;
+  margin-bottom: 20px;
+  font-size: 28px;
+  border-bottom: 2px solid #003366;
+  padding-bottom: 10px;
+}
+
+h3 {
+  margin-top: 25px;
+  color: #cc0000;
+  font-size: 22px;
+}
+
+p {
+  font-size: 16px;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+strong {
+  color: #003366;
+}
+
+
+
+
+
+.contenedor-imagen {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.foto-perfil {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #003366;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+
+
+
+
+.menu-oculto button {
+  width: 100%;
+  font-size: 14px;
+}
+
+
+
+
+
+.btn-editar {
+  background-color: #003366;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-editar:hover {
+  background-color: #005599;
+}
+
+
+/* Estilos para modal emergente */
+.modal {
+  display: none; /* Oculto por defecto */
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 20px 30px;
+  border-radius: 10px;
+  width: 400px;
+  max-width: 90%;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.modal-content p {
+  margin-bottom: 20px;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.modal-content button {
+  background-color: #003366;
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.modal-content button:hover {
+  background-color: #005599;
+}
+
+
+
+
+/* Modal de confirmación */
+.modal-oculto {
+  display: none; /* Por defecto está oculto */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-visible {
+  display: flex;
+}
+
+.modal-contenido {
+  background-color: white;
+  padding: 25px;
+  border-radius: 10px;
+  text-align: center;
+  width: 300px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.modal-botones {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.btn-cancelar, .btn-continuar {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-cancelar {
+  background-color: #ccc;
+  color: #000;
+}
+
+.btn-continuar {
+  background-color: #cc0000;
+  color: #fff;
+}
+
+
+

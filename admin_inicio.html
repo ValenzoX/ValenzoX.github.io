@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Panel Administrador</title>
+  <link rel="stylesheet" href="admin_inicio.css" />
+
+  <!-- Firebase SDKs (compat) -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+</head>
+<body>
+
+  <!-- Barra superior con hamburguesa -->
+  <header class="barra-superior">
+    <div class="contenedor-barra">
+      <div class="logo">
+        <img src="logo.jpg" alt="Logo" />
+      </div>
+      <nav class="nav-barra">
+        <a href="inicio.html">Inicio</a>
+        <button class="hamburger" onclick="mostrarMenu()">☰</button>
+      </nav>
+    </div>
+    <div id="menuHamburguesa" class="menu-oculto"></div>
+  </header>
+
+  <!-- Contenido principal -->
+  <div class="container">
+    <h2>Panel del Administrador</h2>
+    <h3>Maestros registrados</h3>
+    <div id="listaMaestros" class="grid-maestros"></div>
+  </div>
+
+  <script src="admin_inicio.js"></script>
+</body>
+</html>

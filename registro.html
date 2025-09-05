@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Registro</title>
+  <link rel="stylesheet" href="registro.css" />
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+
+  <!-- EmailJS SDK CORRECTO -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script>
+    emailjs.init("XtRqOni6mzxlLKUKT"); // Tu PUBLIC KEY
+  </script>
+</head>
+
+<body>
+  <header class="barra-superior">
+    <div class="contenedor-barra">
+      <div class="logo">
+        <img src="logo.jpg" alt="Logo" />
+      </div>
+      <nav class="nav-barra">
+        <a href="inicio.html">Inicio</a>
+        <a href="iniciar_sesion.html">Iniciar Sesión</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <h2>Registro</h2>
+    <input type="email" id="email" placeholder="Correo electrónico"><br>
+    <button onclick="generarContrasena()">Generar contraseña</button>
+    <p id="passwordDisplay"></p>
+    <p class="note">Después podrá editar su contraseña</p>
+    <button onclick="registrarManual()">Continuar</button>
+    <hr>
+    <button onclick="registrarConGoogle()">Registrarse con Google</button>
+  </div>
+
+  <script src="registro.js"></script>
+</body>
+
+</html>

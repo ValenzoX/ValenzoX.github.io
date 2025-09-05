@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil - UAGro</title>
+    <link rel="stylesheet" href="miperfil.css">
+    <style>
+        /* Estilos rápidos adicionales */
+        #menuHamburguesa { 
+            position: absolute; top: 60px; right: 20px; 
+            background: white; border: 1px solid #ccc; 
+            padding: 15px; display: none; width: 220px; border-radius: 8px; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+            z-index: 1000;
+        }
+        .menu-visible { display: block !important; }
+        .menu-hamburguesa button {
+            width: 100%;
+            margin-top: 10px;
+            padding: 8px;
+            border: none;
+            background-color: #cc0000;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .menu-hamburguesa button:hover {
+            background-color: #ff3333;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Barra superior -->
+    <header class="barra-superior">
+        <div class="contenedor-barra">
+            <div class="logo">
+                <img src="logo.jpg" alt="Logo" />
+            </div>
+            <nav class="nav-barra">
+                <a href="inicio.html">Inicio</a>
+            </nav>
+            <button class="hamburger" onclick="mostrarMenu()">☰</button>
+        </div>
+        <div id="menuHamburguesa" class="menu-hamburguesa"></div>
+    </header>
+
+    <!-- Contenedor principal -->
+    <main>
+        <div id="perfilContent" class="container">
+            <!-- Perfil se cargará aquí mediante JS -->
+        </div>
+    </main>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+
+    <!-- Tu JS -->
+    <script src="miperfil.js"></script>
+    <script>
+        // Mostrar menú hamburguesa
+        function mostrarMenu() {
+            const menu = document.getElementById("menuHamburguesa");
+            menu.classList.toggle("menu-visible");
+
+            if (!menu.classList.contains("menu-visible")) return;
+
+            const correo = localStorage.getItem("correoMaestro") || "-";
+            menu.innerHTML = `
+                <p><strong>Correo:</strong> ${correo}</p>
+                <button onclick="cerrarSesion()">Cerrar sesión</button>
+            `;
+        }
+
+        // Cerrar sesión y redirigir a inicio.html
+        function cerrarSesion() {
+            firebase.auth().signOut().then(() => {
+                localStorage.clear();
+                window.location.href = "inicio.html";
+            }).catch(err => console.error(err));
+        }
+    </script>
+</body>
+</html>

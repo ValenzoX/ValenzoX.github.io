@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Alta Usuario</title>
+  <link rel="stylesheet" href="alta_usuario.css">
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+</head>
+<body>
+
+  <!-- Barra superior -->
+  <header class="barra-superior">
+    <div class="contenedor-barra">
+      <div class="logo">
+        <img src="logo.jpg" alt="Logo" />
+      </div>
+      <nav class="nav-barra">
+        <a href="inicio.html">Inicio</a>
+        <button class="hamburger" onclick="mostrarMenu()">☰</button>
+      </nav>
+    </div>
+    <div id="menuHamburguesa" class="menu-oculto"></div>
+  </header>
+
+  <!-- Contenido principal -->
+  <div class="container">
+    <h2>Registrar Subadministrador</h2>
+
+    <input type="email" id="correo" placeholder="Correo electrónico"><br>
+    <input type="text" id="nombre" placeholder="Nombre completo">
+    <input type="text" id="escuela" placeholder="Escuela">
+
+    <h3>Permisos</h3>
+<div class="permisos-container">
+  <label class="switch">
+    <input type="checkbox" id="permisoVer">
+    <span class="slider"></span>
+    <span class="switch-label">Ver</span>
+  </label>
+
+  <label class="switch">
+    <input type="checkbox" id="permisoEditar">
+    <span class="slider"></span>
+    <span class="switch-label">Editar</span>
+  </label>
+</div>
+
+    <button onclick="registrarSubadmin()">Registrar</button>
+    <p id="mensaje"></p>
+  </div>
+
+  <script src="alta_usuario.js"></script>
+</body>
+</html>

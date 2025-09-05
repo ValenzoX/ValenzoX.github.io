@@ -1,0 +1,195 @@
+/* Reglas base */
+* { box-sizing: border-box; }
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #fff;
+  margin: 0;
+  color: #222;
+}
+
+/* Barra superior */
+.barra-superior {
+  background: #003366;
+  padding: 18px 0;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.08);
+}
+.contenedor-barra {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo img { height: 50px; }
+.nav-barra a {
+  color: #fff;
+  text-decoration: none;
+  margin-right: 12px;
+}
+.hamburger {
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 6px;
+}
+
+/* Menú hamburguesa */
+.menu-oculto {
+  display: none;
+  position: fixed;
+  right: 20px;
+  top: 78px;
+  background: #f8faff;
+  border: 1px solid #d6e0f0;
+  border-radius: 10px;
+  padding: 16px;
+  width: 260px;
+  z-index: 2000;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+}
+.menu-visible { display: block; }
+
+/* Contenedor principal */
+.container {
+  width: 90%;
+  max-width: 1100px;
+  margin: 30px auto;
+}
+
+/* Grid de solicitudes */
+.grid-maestros {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 20px;
+  margin-top: 18px;
+}
+
+/* Card de solicitud */
+.solicitud-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px;
+  background: #f8faff;
+  border: 1px solid #d6e0f0;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+  min-height: 120px;
+  position: relative;
+}
+
+/* Contenedor de la foto */
+.contenedor-foto-card {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 3px solid #003366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+}
+.foto-perfil-card {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block;
+}
+
+/* Información de la solicitud */
+.info-solicitud {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  text-align: left;
+}
+.info-solicitud p { margin: 0; font-size: 14px; color: #133044; }
+.info-solicitud strong { color: #003366; }
+
+/* Botones dentro del card */
+.solicitud-botones {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.solicitud-botones button {
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  color: white;
+}
+.solicitud-botones .aprobar { background-color: #28a745; }
+.solicitud-botones .aprobar:hover { background-color: #218838; }
+.solicitud-botones .rechazar { background-color: #dc3545; }
+.solicitud-botones .rechazar:hover { background-color: #c82333; }
+
+/* Responsive: apilar vertical en pantallas pequeñas */
+@media (max-width: 500px) {
+  .solicitud-card { flex-direction: column; align-items: center; text-align: center; min-height: auto; }
+  .info-solicitud { text-align: center; }
+  .solicitud-botones { flex-direction: row; gap: 8px; margin-top: 10px; }
+}
+
+
+#solicitudes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.solicitud-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  width: 300px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.2s;
+}
+
+.solicitud-card:hover {
+  transform: scale(1.03);
+}
+
+.solicitud-card img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.solicitud-info p {
+  margin: 5px 0;
+  text-align: center;
+}
+
+.solicitud-botones {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+}
+
+.solicitud-botones button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
+}
+
+.aprobar { background-color: #28a745; }
+.rechazar { background-color: #dc3545; }

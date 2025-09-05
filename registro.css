@@ -1,0 +1,91 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+}
+
+
+/* Barra superior tipo Mercado Libre */
+.barra-superior {
+  background-color: #0033a0; /* Azul fuerte */
+  color: white;
+  padding: 20px 30px; /* ↑ más altura con más padding */
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+
+.contenedor-barra {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo img {
+  height: 60px; /* ↑ agrandamos el logo también si quieres */
+}
+
+.nav-barra a {
+  color: white;
+  text-decoration: none;
+  margin-left: 25px;
+  font-size: 1.1rem; /* Texto un poco más grande */
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.nav-barra a:hover {
+  color: #ff0000; /* Rojo al pasar el mouse */
+}
+
+
+
+.container {
+  padding: 40px;
+  background-color: #f0f8ff;
+  border-radius: 12px;
+  max-width: 450px;
+  margin: 60px auto;
+  box-shadow: 0 0 10px rgba(0,0,0,0.15);
+}
+
+h2 {
+  color: #0033cc;
+}
+
+input {
+  padding: 10px;
+  margin: 10px;
+  width: 80%;
+  border: 2px solid #0033cc;
+  border-radius: 8px;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 10px;
+  background-color: #cc0000;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #990000;
+}
+
+.note {
+  font-size: 0.9em;
+  color: #333;
+}
+
+.google-btn {
+  background-color: #4285F4;
+  color: white;
+}

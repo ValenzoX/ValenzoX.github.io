@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Teacher Form</title>
+  <link rel="stylesheet" href="fichaMaestro.css" />
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+</head>
+<body>
+  <!-- Top bar -->
+  <header class="barra-superior">
+    <div class="contenedor-barra">
+      <div class="logo">
+        <img src="logo.jpg" alt="Logo" />
+      </div>
+      <nav class="nav-barra">
+        <a href="inicio.html">Home</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <h2>Teacher Identification Form</h2>
+    <label for="nombreCompleto">Full name:</label>
+    <input type="text" id="nombreCompleto" placeholder="First and last name"><br>
+
+    <label for="grado">Degree:</label>
+    <input type="text" id="grado" placeholder="Degree"><br>
+
+    <label for="institucion">Educational Institution:</label>
+    <input type="text" id="institucion" placeholder="Institution name"><br>
+
+    <label for="programas">Educational program(s):</label>
+    <input type="text" id="programas" placeholder="Programs"><br>
+
+    <label for="modalidades">Modalities:</label>
+    <input type="text" id="modalidades" placeholder="Modalities"><br>
+
+    <label for="facultadAdscripción">Faculty of affiliation:</label>
+    <input type="text" id="facultadAdscripción" placeholder="Faculty"><br>
+
+    <label for="formacionAcademica">Academic field/area:</label>
+    <input type="text" id="formacionAcademica" placeholder="Academic area"><br>
+
+    <label>Course taught August - January (with brief description/competency):</label>
+    <div id="asignaturasAgostoEnero">
+      <div class="asignaturaGrupo">
+        <input type="text" class="descripcionAgostoEnero" placeholder="Course description">
+        <input type="text" class="fechaAgostoEnero" placeholder="Dates (e.g. Aug 2025 - Jan 2026)">
+      </div>
+    </div>
+    <button type="button" onclick="addCourseAgostoEnero()">➕</button><br>
+
+    <label>Course taught February - July (with brief description/competency):</label>
+    <div id="asignaturasFebreroJulio">
+      <div class="asignaturaGrupo">
+        <input type="text" class="descripcionFebreroJulio" placeholder="Course description">
+        <input type="text" class="fechaFebreroJulio" placeholder="Dates (e.g. Feb 2026 - Jul 2026)">
+      </div>
+    </div>
+    <button type="button" onclick="addCourseFebreroJulio()">➕</button><br>
+
+    <label for="asignaturasOtroPeriodo">Courses taught in another period (name, period, description):</label>
+    <input type="text" id="asignaturasOtroPeriodo" placeholder="Other period"><br>
+
+    <label for="semestrePreferido">Preferred semester/period for implementing COIL:</label>
+    <input type="text" id="semestrePreferido" placeholder="Preferred semester"><br>
+
+    <label for="interesUAP">Interest in course, seminar, or project to implement:</label>
+    <input type="text" id="interesUAP" placeholder="Collaborative interest"><br>
+
+    <label for="duracionColaboracion">Collaboration duration (4–12 weeks):</label>
+    <input type="number" id="duracionColaboracion" placeholder="Weeks"><br>
+
+    <label for="tipoIntercambio">Type of exchange (Synchronous / Asynchronous):</label>
+    <input type="text" id="tipoIntercambio" placeholder="Exchange type"><br>
+
+    <label for="promedioEstudiantes">Average number of students per class:</label>
+    <input type="number" id="promedioEstudiantes" placeholder="Average number"><br>
+
+    <label for="idiomas">Languages and level of proficiency:</label>
+    <input type="text" id="idiomas" placeholder="Languages and level"><br>
+
+    <label>Contact information</label><br>
+    <input type="email" id="contactoCorreo" placeholder="Email"><br>
+    <input type="tel" id="contactoTelefono" placeholder="Phone or WhatsApp"><br>
+    <input type="text" id="contactoRedes" placeholder="Social networks (Facebook, LinkedIn, etc.)"><br>
+
+    <label for="fotoPerfil">Profile photo:</label>
+    <input type="file" id="fotoPerfil" accept="image/*"><br>
+
+    <button onclick="saveForm()">Save Data</button>
+    <p id="mensaje"></p>
+  </div>
+
+  <script src="fichaMaestro_en_ingles.js"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inicio</title>
+  <link rel="stylesheet" href="inicio.css" />
+  <!-- Librerías necesarias -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+  <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+
+  <!-- Barra superior -->
+  <header class="barra-superior">
+    <div class="contenedor-barra">
+      <div class="logo">
+        <img src="logo.jpg" alt="Logo" />
+      </div>
+      <nav class="nav-barra">
+        <a href="opcion_Idioma.html">Registrarse</a>
+        <a href="iniciar_sesion.html">Iniciar sesión</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Contenedor de perfiles -->
+  <div class="container">
+    <h1>Docentes Registrados</h1>
+
+    <!-- Filtros -->
+    <div class="filtros-busqueda">
+      <label for="filtroInstitucion">Institución:</label>
+      <select id="filtroInstitucion">
+        <option value="">Todas</option>
+        <option value="UAGRO">UAGRO</option>
+        <option value="Otra">Otra</option>
+      </select>
+
+      <label for="filtroEscuela">Escuela o Facultad:</label>
+      <select id="filtroEscuela" disabled>
+        <option value="">Seleccione institución primero</option>
+      </select>
+
+      <label for="filtroPrograma">Programa educativo:</label>
+      <select id="filtroPrograma" disabled>
+        <option value="">Seleccione escuela/facultad primero</option>
+      </select>
+    </div>
+
+    <div id="listaMaestros" class="grid-maestros"></div>
+  </div>
+
+  <script src="inicio.js"></script>
+</body>
+</html>

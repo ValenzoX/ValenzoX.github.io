@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ficha Identificación Profesores</title>
+    <link rel="stylesheet" href="ForMaestro.css" />
+</head>
+
+
+<body>
+    <header class="barra-superior">
+        <img src="logo.png" alt="Logo" class="logo">
+        <h1 class="titulo-header">Ficha de Identificación Profesores</h1>
+    </header>
+
+
+    <div class="container">
+        <h2>Ficha de Identificación - Profesores</h2>
+        <form id="fichaForm">
+            <label>Nombre completo (Grado, Nombre, Apellidos):</label>
+            <input type="text" id="nombre" required>
+
+            <label>Nombre de su institución educativa:</label>
+            <input type="text" id="institucion" required>
+
+            <label>Programa(s) Educativo(s) y modalidades:</label>
+            <input type="text" id="programas" required>
+
+            <label>Facultad de adscripción:</label>
+            <input type="text" id="facultad" required>
+
+            <label>Academia / Área de formación académica:</label>
+            <input type="text" id="academia" required>
+
+            <label>Asignaturas semestre Agosto-Enero (con descripción y fechas):</label>
+            <textarea id="agostoEnero" required></textarea>
+
+            <label>Asignaturas semestre Febrero-Julio:</label>
+            <textarea id="febreroJulio" required></textarea>
+
+            <label>Asignaturas en otro periodo:</label>
+            <textarea id="otroPeriodo"></textarea>
+
+            <label>Semestre que prefiere:</label>
+            <input type="text" id="preferencia">
+
+            <label>Interés en curso/seminario/proyecto internacional:</label>
+            <textarea id="interesUAP" required></textarea>
+
+            <label>Duración (semanas, 4-12):</label>
+            <input type="number" id="duracion" min="4" max="12" required>
+
+            <label>Tipo de intercambio:</label>
+            <select id="tipoIntercambio">
+                <option value="Síncrono">Síncrono</option>
+                <option value="Asíncrono">Asíncrono</option>
+            </select>
+
+            <label>Promedio de estudiantes por clase:</label>
+            <input type="number" id="promedioEstudiantes" required>
+
+            <label>Idiomas y nivel de dominio:</label>
+            <input type="text" id="idiomas" required>
+
+            <label>Contacto (Correo, Tel/WhatsApp, Linkedin/Facebook):</label>
+            <textarea id="contacto" required></textarea>
+
+            <label>Fotografía:</label>
+            <input type="file" id="foto" accept="image/*" required>
+
+            <button type="submit">Guardar Ficha</button>
+        </form>
+        <p id="mensaje"></p>
+    </div>
+    <!-- ✅ Firebase scripts compatibles con navegador sin módulos -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-storage-compat.js"></script>
+    <script src="ForMaestro.js"></script>
+
+</body>
+
+</html>

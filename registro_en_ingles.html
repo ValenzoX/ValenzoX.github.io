@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Register</title>
+  <link rel="stylesheet" href="registro.css" />
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script>
+    emailjs.init("XtRqOni6mzxlLKUKT"); 
+  </script>
+</head>
+<body>
+  <!-- Top bar -->
+  <header class="barra-superior">
+    <div class="contenedor-barra">
+      <div class="logo">
+        <img src="logo.jpg" alt="Logo" />
+      </div>
+      <nav class="nav-barra">
+        <a href="inicio.html">Home</a>
+        <a href="iniciar_sesion.html">Log in</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <h2>Register</h2>
+    <input type="email" id="email" placeholder="Email address"><br>
+    <button onclick="generatePassword()">Generate password</button>
+    <p id="passwordDisplay"></p>
+    <p class="note">You can edit your password later</p>
+    <button onclick="registerManual()">Continue</button>
+    <hr>
+    <button onclick="registerWithGoogle()">Register with Google</button>
+  </div>
+
+  <script src="registro_en_ingles.js"></script>
+</body>
+</html>

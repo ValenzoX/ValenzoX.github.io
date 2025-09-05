@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Solicitudes de Edición</title>
+  <link rel="stylesheet" href="solicitudes_edicion_mtrs.css" />
+
+  <!-- Firebase SDKs (compat) -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+</head>
+<body>
+
+  <!-- Barra superior con hamburguesa -->
+  <header class="barra-superior">
+    <div class="contenedor-barra">
+      <div class="logo">
+        <img src="logo.jpg" alt="Logo" />
+      </div>
+      <nav class="nav-barra">
+        <a href="admin_inicio.html">Panel Administrador</a>
+        <button class="hamburger" onclick="mostrarMenu()">☰</button>
+      </nav>
+    </div>
+    <div id="menuHamburguesa" class="menu-oculto"></div>
+  </header>
+
+  <!-- Contenedor principal de solicitudes -->
+  <div class="container">
+    <h2>Solicitudes de Edición</h2>
+    <div id="solicitudes" class="grid-maestros"></div>
+  </div>
+
+  <script src="solicitudes_edicion_mtrs.js"></script>
+</body>
+</html>

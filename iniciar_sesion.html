@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Iniciar Sesión</title>
+  <link rel="stylesheet" href="iniciar_sesion.css" />
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+</head>
+<body>
+  <header class="barra-superior">
+    <div class="contenedor-barra">
+      <div class="logo">
+        <img src="logo.jpg" alt="Logo" />
+      </div>
+      <nav class="nav-barra">
+        <a href="inicio.html">Inicio</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <h2>Iniciar Sesión</h2>
+    
+    <input type="email" id="email" placeholder="Correo electrónico"><br>
+    <input type="password" id="password" placeholder="Contraseña"><br>
+    <button type="button" onclick="iniciarSesionManual()">Iniciar sesión</button>
+
+    <hr>
+
+    <button type="button" onclick="iniciarSesionConGoogle()">Iniciar sesión con Google</button>
+
+    <p id="mensaje"></p>
+  </div>
+
+  <script src="iniciar_sesion.js"></script>
+</body>
+</html>
