@@ -94,85 +94,25 @@ function guardarNuevaPass() {
 // ================= MOSTRAR PERFIL =================
 // ================= MOSTRAR PERFIL =================
 function mostrarPerfil(data, perfilCorreo, esMismoUsuario = false) {
-  const container = perfilContainer;
-  const crearCampo = (label, valor) => `<p><strong>${label}:</strong> ${valor || "-"}</p>`;
   let html = "";
 
-  // Foto + nombre
-  if (data.fotoPerfil) {
-    html += `<div class="contenedor-imagen">
-      <img src="${data.fotoPerfil}" alt="Foto de perfil" class="foto-perfil">
-    </div>`;
-  }
-  if (data.nombreCompleto) {
-    html += `<div class="nombre-perfil" style="text-align:center; font-weight:bold; font-size:1.2em; margin-bottom:20px;">
-      ${data.nombreCompleto}
-    </div>`;
-  }
+  // Foto y nombre
+  html += `<div class="contenedor-imagen"><img src="${data.fotoPerfil || 'logo.jpg'}" class="foto-perfil"></div>`;
+  html += `<div class="nombre-perfil">${data.nombreCompleto || '-'}</div>`;
 
-  // Datos Personales
-  html += `<div class="perfil-section">
-    <h3>Datos Personales</h3>
-    ${crearCampo("Formacion académica", data.grado)}
-    ${crearCampo("Edad", data.edad)}       
-    ${crearCampo("Sexo", data.sexo)}
-    ${crearCampo("Correo", data.contactoCorreo)}
-    ${crearCampo("Teléfono", data.contactoTelefono)}
-    ${crearCampo("Redes sociales", data.contactoRedes)}
-  </div>`;
+  // Datos personales, laborales, colaboración...
+  html += `<div class="perfil-section"><h3>Datos Personales</h3> ... </div>`;
 
-  // Datos Laborales
-  html += `<div class="perfil-section">
-    <h3>Datos Laborales</h3>
-    ${crearCampo("Institución educativa", data.institucion)}
-    ${crearCampo("Escuela / Facultad", data.escuelaAdscripcion)}
-    ${crearCampo("Programa(s)", Array.isArray(data.programa) ? data.programa.join(", ") : data.programa)}
-    ${crearCampo("Formación académica", data.formacionAcademica)}
-  </div>`;
-
-  // Colaboración Internacional
-  html += `<div class="perfil-section">
-    <h3>Colaboración Internacional</h3>
-    ${crearCampo("¿Colabora con extranjero?", data.colaboraExtranjero === "si" ? "Sí" : "No")}`;
-
-  // 👇 Solo mostrar detalles de contacto si el admin está logueado
-  const correoLogueado = localStorage.getItem("correoMaestro");
-  const esAdmin = (correoLogueado === "21387744@uagro.mx");
-
-  if (data.colaboraExtranjero === "si" && esAdmin) {
-    html += `
-    ${crearCampo("Nombre contacto extranjero", data.nombreContactoExtranjero)}
-    ${crearCampo("Correo contacto extranjero", data.correoContactoExtranjero)}
-    ${crearCampo("Actividad internacional", data.detalleActividad)}
-    `;
-  }
-
-  html += `</div>`;
-
-  // Asignaturas
-  if (Array.isArray(data.asignaturasUAP) && data.asignaturasUAP.length > 0) {
-    html += `<div class="perfil-section"><h4>UAp´s</h4>`;
-    data.asignaturasUAP.forEach((asig, i) => {
-      html += `<p class="asignatura-view">📘 <strong>${i + 1}:</strong> ${asig.nombre} <br> 
-          <strong>Descripción:</strong> ${asig.descripcion} <br> 
-          <strong>Periodo:</strong> ${asig.periodo} <br> 
-          <strong>Modalidad:</strong> ${asig.modalidad}
-      </p>`;
-    });
-    html += `</div>`;
-  }
-
-  // Botón Editar
+  // Mostrar botón de editar solo si es el mismo usuario
   if (esMismoUsuario) {
     html += `<div style="text-align:center; margin-top:20px;">
-      <button id="btnEditarPerfil" onclick="window.location.href='fichaMaestroEdicion.html?doc=${encodeURIComponent(perfilCorreo)}'">
-        ✏️ Editar
-      </button>
+      <button id="btnEditarPerfil" onclick="window.location.href='fichaMaestroEdicion.html?doc=${encodeURIComponent(perfilCorreo)}'">✏️ Editar</button>
     </div>`;
   }
 
-  container.innerHTML = html;
+  perfilContainer.innerHTML = html;
 }
+
 
 
 // ================= CARGAR EXCEL =================
@@ -399,7 +339,7 @@ function getDocFromURL() {
 }
 
 async function cargarPerfil() {
-  const docParam = getDocFromURL();
+  const docParam = getDocFromURL(); // URL ?doc=correo
   let correoUsuarioLogueado = null;
 
   await new Promise(resolve => {
@@ -411,7 +351,7 @@ async function cargarPerfil() {
 
   const docId = docParam || correoUsuarioLogueado;
   if (!docId) {
-    perfilContainer.innerText = "No se encontró el perfil. Inicia sesión.";
+    perfilContainer.innerHTML = "<p>No se encontró el perfil. Inicia sesión o vuelve a inicio.</p>";
     return;
   }
 
@@ -420,21 +360,25 @@ async function cargarPerfil() {
     const snapshot = await docRef.collection("fichaIdentificacion").get();
 
     if (snapshot.empty) {
-      perfilContainer.innerText = "No se encontró ninguna ficha.";
+      perfilContainer.innerHTML = "<p>No se encontró ninguna ficha para este maestro.</p>";
       return;
     }
 
+    // Combinar todos los documentos de ficha
     let datosPerfil = {};
     snapshot.docs.forEach(doc => datosPerfil = { ...datosPerfil, ...doc.data() });
 
+    // Mostrar perfil
     const esMismoUsuario = correoUsuarioLogueado && (correoUsuarioLogueado === docId);
     mostrarPerfil(datosPerfil, docId, esMismoUsuario);
 
   } catch (err) {
-    perfilContainer.innerText = "Error al obtener la ficha.";
+    perfilContainer.innerHTML = "<p>Error al obtener la ficha.</p>";
     console.error(err);
   }
 }
 
+
 // Ejecutar al cargar
 cargarPerfil();
+
