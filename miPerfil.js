@@ -92,7 +92,9 @@ function guardarNuevaPass() {
 }
 
 // ================= MOSTRAR PERFIL =================
-// ================= MOSTRAR PERFIL =================function mostrarPerfil(data, perfilCorreo, esMismoUsuario = false) {
+// ================= MOSTRAR PERFIL =================
+
+function mostrarPerfil(data, perfilCorreo, esMismoUsuario = false) {
   let html = "";
 
   // ------------------ FOTO Y NOMBRE ------------------
@@ -441,5 +443,6 @@ async function cargarPerfil() {
 
 // Ejecutar al cargar
 cargarPerfil();
+
 
 
