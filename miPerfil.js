@@ -92,27 +92,87 @@ function guardarNuevaPass() {
 }
 
 // ================= MOSTRAR PERFIL =================
-// ================= MOSTRAR PERFIL =================
-function mostrarPerfil(data, perfilCorreo, esMismoUsuario = false) {
+// ================= MOSTRAR PERFIL =================function mostrarPerfil(data, perfilCorreo, esMismoUsuario = false) {
   let html = "";
 
-  // Foto y nombre
-  html += `<div class="contenedor-imagen"><img src="${data.fotoPerfil || 'logo.jpg'}" class="foto-perfil"></div>`;
-  html += `<div class="nombre-perfil">${data.nombreCompleto || '-'}</div>`;
+  // ------------------ FOTO Y NOMBRE ------------------
+  html += `
+    <div class="contenedor-imagen">
+      <img src="${data.fotoPerfil || 'logo.jpg'}" class="foto-perfil">
+    </div>
+    <div class="nombre-perfil" style="text-align:center; font-size:22px; margin-bottom:20px;">
+      ${data.nombreCompleto || '-'}
+    </div>
+  `;
 
-  // Datos personales, laborales, colaboración...
-  html += `<div class="perfil-section"><h3>Datos Personales</h3> ... </div>`;
+  // ------------------ DATOS PERSONALES ------------------
+  html += `
+    <div class="perfil-section">
+      <h3>Datos Personales</h3>
+      <p><strong>Nombre completo:</strong> ${data.nombreCompleto || '-'}</p>
+      <p><strong>Grado:</strong> ${data.grado || '-'}</p>
+      <p><strong>Sexo:</strong> ${data.sexo || '-'}</p>
+      <p><strong>Correo:</strong> ${data.contactoCorreo || '-'}</p>
+      <p><strong>Teléfono:</strong> ${data.contactoTelefono || '-'}</p>
+      <p><strong>Redes:</strong> ${data.contactoRedes || '-'}</p>
+    </div>
+  `;
 
-  // Mostrar botón de editar solo si es el mismo usuario
+  // ------------------ DATOS LABORALES ------------------
+  html += `
+    <div class="perfil-section">
+      <h3>Datos Laborales</h3>
+      <p><strong>Institución:</strong> ${data.institucion || '-'}</p>
+      <p><strong>Escuela de adscripción:</strong> ${data.escuelaAdscripcion || '-'}</p>
+      <p><strong>Programa(s):</strong> ${data.programa?.join(', ') || '-'}</p>
+      <p><strong>Formación académica:</strong> ${data.formacionAcademica || '-'}</p>
+    </div>
+  `;
+
+  // ------------------ COLABORACIÓN INTERNACIONAL ------------------
+  html += `
+    <div class="perfil-section">
+      <h3>Colaboración Internacional</h3>
+      <p><strong>Colabora con extranjero:</strong> ${data.colaboraExtranjero || '-'}</p>
+      <p><strong>Nombre del contacto:</strong> ${data.nombreContactoExtranjero || '-'}</p>
+      <p><strong>Correo del contacto:</strong> ${data.correoContactoExtranjero || '-'}</p>
+      <p><strong>Actividad:</strong> ${data.detalleActividad || '-'}</p>
+    </div>
+  `;
+
+  // ------------------ ASIGNATURAS ------------------
+  if (data.asignaturasUAP && data.asignaturasUAP.length > 0) {
+    html += `
+      <div class="perfil-section">
+        <h3>Asignaturas</h3>
+    `;
+    data.asignaturasUAP.forEach((asig, index) => {
+      html += `
+        <div class="asignaturaGrupo" style="margin-bottom:10px;">
+          <strong>Asignatura ${index + 1}</strong><br>
+          <p><strong>Nombre:</strong> ${asig.nombre || '-'}</p>
+          <p><strong>Descripción:</strong> ${asig.descripcion || '-'}</p>
+          <p><strong>Periodo:</strong> ${asig.periodo || '-'}</p>
+          <p><strong>Modalidad:</strong> ${asig.modalidad || '-'}</p>
+        </div>
+      `;
+    });
+    html += `</div>`;
+  }
+
+  // ------------------ BOTÓN EDITAR (SI ES EL MISMO USUARIO) ------------------
   if (esMismoUsuario) {
-    html += `<div style="text-align:center; margin-top:20px;">
-      <button id="btnEditarPerfil" onclick="window.location.href='fichaMaestroEdicion.html?doc=${encodeURIComponent(perfilCorreo)}'">✏️ Editar</button>
-    </div>`;
+    html += `
+      <div style="text-align:center; margin-top:20px;">
+        <button id="btnEditarPerfil" onclick="window.location.href='fichaMaestroEdicion.html?doc=${encodeURIComponent(perfilCorreo)}'">
+          ✏️ Editar
+        </button>
+      </div>
+    `;
   }
 
   perfilContainer.innerHTML = html;
 }
-
 
 
 // ================= CARGAR EXCEL =================
@@ -381,4 +441,5 @@ async function cargarPerfil() {
 
 // Ejecutar al cargar
 cargarPerfil();
+
 
