@@ -35,26 +35,28 @@ function mostrarMenu() {
 
   if (password) {
     contenido += `
-    <div class="campo-password">
-      <label for="passInput"><strong>Contraseña:</strong></label>
-      <input type="password" id="passInput" value="${password}" disabled>
-      <div class="botones-pass">
-        <button onclick="togglePassword()">👁️</button>
-        <button onclick="activarEdicion()">Editar contraseña</button>
+      <div class="campo-password">
+        <label for="passInput"><strong>Contraseña:</strong></label>
+        <input type="password" id="passInput" value="${password}" disabled>
+        <div class="botones-pass">
+          <button onclick="togglePassword()">👁️</button>
+          <button onclick="activarEdicion()">Editar contraseña</button>
+        </div>
+        <div id="editarSeccion" style="display:none; margin-top: 10px;">
+          <input type="password" id="nuevaPass" placeholder="Nueva contraseña">
+          <button onclick="guardarNuevaPass()">Guardar nueva contraseña</button>
+        </div>
       </div>
-      <div id="editarSeccion" style="display:none; margin-top: 10px;">
-        <input type="password" id="nuevaPass" placeholder="Nueva contraseña">
-        <button onclick="guardarNuevaPass()">Guardar nueva contraseña</button>
-      </div>
-    </div>`;
+    `;
   }
 
   contenido += `
-  <div style="margin-top: 20px;">
-    <button onclick="cerrarSesion()" style="background-color: #cc0000; color: white; padding: 8px 16px; border: none; border-radius: 6px; cursor: pointer;">
-      Cerrar sesión
-    </button>
-  </div>`;
+    <div style="margin-top: 20px;">
+      <button onclick="cerrarSesion()" style="background-color: #cc0000; color: white; padding: 8px 16px; border: none; border-radius: 6px; cursor: pointer;">
+        Cerrar sesión
+      </button>
+    </div>
+  `;
 
   menu.innerHTML = contenido;
 }
@@ -92,8 +94,6 @@ function guardarNuevaPass() {
 }
 
 // ================= MOSTRAR PERFIL =================
-// ================= MOSTRAR PERFIL =================
-
 function mostrarPerfil(data, perfilCorreo, esMismoUsuario = false) {
   let html = "";
 
@@ -175,7 +175,6 @@ function mostrarPerfil(data, perfilCorreo, esMismoUsuario = false) {
 
   perfilContainer.innerHTML = html;
 }
-
 
 // ================= CARGAR EXCEL =================
 async function cargarExcelUAGRO() {
@@ -271,13 +270,11 @@ async function activarEdicionPerfil() {
   }
 
   // Cambiar botón de editar por guardar
-  // Cambiar botón de editar por guardar
-const btnEditar = document.getElementById("btnEditarPerfil");
-if (btnEditar) {
-  btnEditar.textContent = "💾 Guardar cambios";
-  btnEditar.onclick = guardarEdicionPerfil; // ✅ ahora solo una función central
-}
-
+  const btnEditar = document.getElementById("btnEditarPerfil");
+  if (btnEditar) {
+    btnEditar.textContent = "💾 Guardar cambios";
+    btnEditar.onclick = guardarEdicionPerfil; // ✅ ahora solo una función central
+  }
 }
 
 // ================= OCULTAR/MOSTRAR CAMPOS EXTRANJERO =================
@@ -290,8 +287,6 @@ function toggleColaboraExtranjero() {
   });
 }
 
-// ================= GUARDAR CAMBIOS EN FIRESTORE =================
-// ================= GUARDAR CAMBIOS EN FIRESTORE =================
 // ================= GUARDAR CAMBIOS EN FIRESTORE =================
 async function guardarEdicionPerfil() {
   const user = auth.currentUser;
@@ -307,7 +302,7 @@ async function guardarEdicionPerfil() {
   const datosPersonales = {
     nombreCompleto: document.getElementById("nombreCompleto")?.value || "",
     grado: document.getElementById("grado")?.value || "",
-    edad: document.getElementById("edad")?.value || "",   // ✅ añadí edad
+    edad: document.getElementById("edad")?.value || "",
     sexo: document.getElementById("sexo")?.value || "",
     contactoCorreo: document.getElementById("contactoCorreo")?.value || "",
     contactoTelefono: document.getElementById("contactoTelefono")?.value || "",
@@ -320,7 +315,7 @@ async function guardarEdicionPerfil() {
     escuelaAdscripcion: document.getElementById("escuela")?.value || "",
     programa: Array.from(document.querySelectorAll("#programasContainer select"))
                   .map(sel => sel.value)
-                  .filter(v => v !== ""), // ✅ mejor manejo de programas
+                  .filter(v => v !== ""),
     formacionAcademica: document.getElementById("formacionAcademica")?.value || ""
   };
 
@@ -345,7 +340,6 @@ async function guardarEdicionPerfil() {
   infoColaboracion.asignaturasUAP = asignaturas;
 
   try {
-    // Guardar todo en Firestore usando batch
     const batch = dbFicha.batch();
 
     const docDatosPersonales = docRef.doc("datosPersonales");
@@ -366,7 +360,6 @@ async function guardarEdicionPerfil() {
     alert("Error al actualizar el perfil. Intenta nuevamente.");
   }
 }
-
 
 // ================= TOAST =================
 function mostrarToast(mensaje) {
@@ -401,7 +394,7 @@ function getDocFromURL() {
 }
 
 async function cargarPerfil() {
-  const docParam = getDocFromURL(); // URL ?doc=correo
+  const docParam = getDocFromURL();
   let correoUsuarioLogueado = null;
 
   await new Promise(resolve => {
@@ -411,38 +404,28 @@ async function cargarPerfil() {
     });
   });
 
-  const docId = docParam || correoUsuarioLogueado;
-  if (!docId) {
-    perfilContainer.innerHTML = "<p>No se encontró el perfil. Inicia sesión o vuelve a inicio.</p>";
-    return;
-  }
+  const docId = docParam ? docParam.replace(/[.#$[\]@]/g, "_") : correoUsuarioLogueado;
+  if (!docId) return;
 
-  try {
-    const docRef = dbFicha.collection("maestros").doc(docId);
-    const snapshot = await docRef.collection("fichaIdentificacion").get();
+  const docRef = dbFicha.collection("maestros").doc(docId).collection("fichaIdentificacion");
+  const [datosPersonalesSnap, datosLaboralesSnap, infoColaboracionSnap] = await Promise.all([
+    docRef.doc("datosPersonales").get(),
+    docRef.doc("datosLaborales").get(),
+    docRef.doc("informacionColaboracion").get()
+  ]);
 
-    if (snapshot.empty) {
-      perfilContainer.innerHTML = "<p>No se encontró ninguna ficha para este maestro.</p>";
-      return;
-    }
+  const datosPersonales = datosPersonalesSnap.exists ? datosPersonalesSnap.data() : {};
+  const datosLaborales = datosLaboralesSnap.exists ? datosLaboralesSnap.data() : {};
+  const infoColaboracion = infoColaboracionSnap.exists ? infoColaboracionSnap.data() : {};
 
-    // Combinar todos los documentos de ficha
-    let datosPerfil = {};
-    snapshot.docs.forEach(doc => datosPerfil = { ...datosPerfil, ...doc.data() });
+  const data = {
+    ...datosPersonales,
+    ...datosLaborales,
+    ...infoColaboracion
+  };
 
-    // Mostrar perfil
-    const esMismoUsuario = correoUsuarioLogueado && (correoUsuarioLogueado === docId);
-    mostrarPerfil(datosPerfil, docId, esMismoUsuario);
-
-  } catch (err) {
-    perfilContainer.innerHTML = "<p>Error al obtener la ficha.</p>";
-    console.error(err);
-  }
+  mostrarPerfil(data, docId, docId === correoUsuarioLogueado);
 }
 
-
-// Ejecutar al cargar
+// ================= EJECUTAR AL CARGAR =================
 cargarPerfil();
-
-
-
