@@ -132,15 +132,29 @@ function mostrarPerfil(data, perfilCorreo, esMismoUsuario = false) {
   `;
 
   // ------------------ COLABORACIÓN INTERNACIONAL ------------------
-  html += `
-    <div class="perfil-section">
-      <h3>Colaboración Internacional</h3>
-      <p><strong>Colabora con extranjero:</strong> ${data.colaboraExtranjero || '-'}</p>
-      <p><strong>Nombre del contacto:</strong> ${data.nombreContactoExtranjero || '-'}</p>
-      <p><strong>Correo del contacto:</strong> ${data.correoContactoExtranjero || '-'}</p>
-      <p><strong>Actividad:</strong> ${data.detalleActividad || '-'}</p>
-    </div>
-  `;
+  // ------------------ COLABORACIÓN INTERNACIONAL ------------------
+let colabNombre = "-";
+let colabCorreo = "-";
+let colabActividad = "-";
+
+// Solo mostrar al admin
+const correoUsuario = localStorage.getItem("correoMaestro");
+if(correoUsuario === "21387744@uagro") {
+    colabNombre = data.nombreContactoExtranjero || "-";
+    colabCorreo = data.correoContactoExtranjero || "-";
+    colabActividad = data.detalleActividad || "-";
+}
+
+html += `
+  <div class="perfil-section">
+    <h3>Colaboración Internacional</h3>
+    <p><strong>Colabora con extranjero:</strong> ${data.colaboraExtranjero || '-'}</p>
+    <p><strong>Nombre del contacto:</strong> ${colabNombre}</p>
+    <p><strong>Correo del contacto:</strong> ${colabCorreo}</p>
+    <p><strong>Actividad:</strong> ${colabActividad}</p>
+  </div>
+`;
+
 
   // ------------------ ASIGNATURAS ------------------
   if (data.asignaturasUAP && data.asignaturasUAP.length > 0) {
@@ -429,3 +443,4 @@ async function cargarPerfil() {
 
 // ================= EJECUTAR AL CARGAR =================
 cargarPerfil();
+
